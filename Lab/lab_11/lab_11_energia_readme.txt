@@ -1,0 +1,1 @@
+We placed the Energia "workspace" at the top of the "msp432p401r" folder. That will be the working location for Lab 11 exercises.

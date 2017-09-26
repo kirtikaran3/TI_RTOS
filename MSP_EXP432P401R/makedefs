@@ -1,0 +1,41 @@
+###### CHANGE LOCATION TO YOUR CODEGEN TOOLS INSTALL DIR. UNIX PATH (no backslashes) #######
+CODEGEN_INSTALL_DIR = c:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.2
+
+CC = "$(CODEGEN_INSTALL_DIR)/bin/armcl"
+LNK = "$(CODEGEN_INSTALL_DIR)/bin/armcl"
+
+XDC_INSTALL_DIR := c:/ti/xdctools_3_32_00_06_core
+TIRTOS_INSTALL_DIR := c:/ti/tirtos_msp43x_2_16_01_14
+TIDRIVERS_INSTALL_DIR := $(TIRTOS_INSTALL_DIR)/products/tidrivers_msp43x_2_16_01_13
+BIOS_INSTALL_DIR := $(TIRTOS_INSTALL_DIR)/products/bios_6_45_02_31
+UIA_INSTALL_DIR := $(TIRTOS_INSTALL_DIR)/products/uia_2_00_05_50
+MSP432DRIVERLIB_INSTALL_DIR ?= $(TIRTOS_INSTALL_DIR)/products/msp432_driverlib_3_10_00_09
+
+TIRTOS_PACKAGES_DIR = $(TIRTOS_INSTALL_DIR)/packages
+TIDRIVERS_PACKAGES_DIR = $(TIDRIVERS_INSTALL_DIR)/packages
+BIOS_PACKAGES_DIR = $(BIOS_INSTALL_DIR)/packages
+UIA_PACKAGES_DIR = $(UIA_INSTALL_DIR)/packages
+
+XDCPATH = $(TIRTOS_PACKAGES_DIR);$(TIDRIVERS_PACKAGES_DIR);$(BIOS_PACKAGES_DIR);$(UIA_PACKAGES_DIR);
+
+CFLAGS = -I$(MSP432DRIVERLIB_INSTALL_DIR)/inc/CMSIS -I$(MSP432DRIVERLIB_INSTALL_DIR)/inc -I$(MSP432DRIVERLIB_INSTALL_DIR)/driverlib/MSP432P4xx -D__MSP432P401R__ -Dccs -DMSP432WARE -mv7M4 --code_state=16 --abi=eabi -me -g --display_error_number --diag_warning=255 --diag_wrap=off --gen_func_subsections=on --float_support=FPv4SPD16
+
+LFLAGS = -l$(MSP432DRIVERLIB_INSTALL_DIR)/driverlib/MSP432P4xx/ccs/msp432p4xx_driverlib.lib MSP_EXP432P401R.cmd -m$(NAME).map --warn_sections --display_error_number --diag_wrap=off --rom_model -i$(CODEGEN_INSTALL_DIR)/lib -llibc.a
+
+###################### SHOULD NOT MODIFY BELOW THIS LINE ############################
+export XDCPATH
+
+XDCTARGET = ti.targets.arm.elf.M4F
+PLATFORM = ti.platforms.msp432:MSP432P401R
+
+ifeq ("$(SHELL)","sh.exe")
+#For Windows
+        RMDIR  = -rmdir /S /Q
+        remove = -del $(subst /,\,$1)
+        pwd    = cd
+else
+#For Linux
+        RMDIR  = rm -rf
+        remove = rm -f $(subst /,\,$1)
+        pwd    = pwd
+endif

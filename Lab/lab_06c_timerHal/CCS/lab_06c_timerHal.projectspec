@@ -1,0 +1,22 @@
+<projectSpec>
+  <project name="lab_06c_timerHal"
+           device="Cortex M.MSP432P401R"
+           postBuildStep="${CCS_INSTALL_ROOT}/utils/tiobj2bin/tiobj2bin ${BuildArtifactFileName} ${BuildArtifactFileBaseName}.bin ${CG_TOOL_ROOT}/bin/armofd ${CG_TOOL_ROOT}/bin/armhex ${CCS_INSTALL_ROOT}/utils/tiobj2bin/mkhex4bin"
+           compilerBuildOptions="-I${CCS_BASE_ROOT}/arm/include/ -I${CCS_BASE_ROOT}/arm/include/CMSIS -I${CG_TOOL_ROOT}/include/ -I${PROJECT_ROOT} -I${PROJECT_ROOT}/driverlib/MSP432P4xx -mv7M4 --code_state=16 --float_support=FPv4SPD16 --gcc --advice:power=&quot;none&quot; --define=__MSP432P401R__ --define=TARGET_IS_MSP432P4XX --define=ccs --diag_warning=225 --display_error_number --diag_wrap=off"
+           linkerBuildOptions="--stack_size=512">
+
+    <pathVariable name="MSPWAREDLIB_ROOT" path="C:\ti\msp\MSPWare_3_10_00_75driverlib/driverlib/MSP432P4xx/" scope="project" />
+    <file action="copy" path="C:\ti\msp\MSPWare_3_10_00_75\driverlib/driverlib/MSP432P4xx\ccs\msp432p4xx_driverlib.lib" />
+    <file action="copy" path="C:\ti\msp\MSPWare_3_10_00_75\driverlib/driverlib/MSP432P4xx" targetDirectory="driverlib" excludeFromBuild="true" />
+    <file action="copy" path="C:\ti\msp\MSPWare_3_10_00_75\driverlib\rom\MSP432P4xx\driverlib.c" targetDirectory="rom" excludeFromBuild="true" />
+    <file action="copy" path="..\hal.c" />
+    <file action="copy" path="..\hal.h" />
+    <file action="copy" path="..\lab_06c_timerHal_readme.txt" />
+    <file action="copy" path="..\main.c" />
+    <file action="copy" path="..\myClocks.c" />
+    <file action="copy" path="..\myClocks.h" />
+    <file action="copy" path="..\myTimers.c" />
+    <file action="copy" path="..\myTimers.h" />
+    <file action="copy" path="..\startup_msp432p401r_ccs.c" overwriteExisting="true" />
+  </project>
+</projectSpec>
