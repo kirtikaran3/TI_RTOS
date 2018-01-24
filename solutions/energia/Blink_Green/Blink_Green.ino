@@ -11,7 +11,7 @@
 */
 
 // most launchpads have a red LED
-//#define LED RED_LED
+
 
 //see pins_energia.h for more LED definitions
 #define LED GREEN_LED
